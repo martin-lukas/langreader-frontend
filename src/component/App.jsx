@@ -1,21 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import axios from '../util/axiosInstance';
-// import ReadingArea from "./ReadingArea";
+import React, {useState} from 'react';
+import Menu from "./Menu";
+import Library from './library/Library';
+// import ReadingArea from "./reading_area/ReadingArea";
 
 const App = () => {
-  const [helloMsg, setHelloMsg] = useState('');
+  const [page, setPage] = useState('');
+  const [openedText, setOpenedText] = useState();
 
-  useEffect(() => {
-    axios.get('/hello')
-      .then(response => setHelloMsg(response.data))
-      .catch(err => console.error(err));
-  }, []);
+  const changePage = (page) => {
+    setPage(page);
+  };
+
+  const openText = (text) => {
+    setPage('ReadingArea');
+    setOpenedText(text);
+  };
 
   return (
     <>
       <h1>LangReader app</h1>
-      <p>{helloMsg}</p>
-      {/*<p>{response}</p>*/}
+      <Menu onItemClick={changePage}/>
+      {page === 'Library' &&
+      <Library onTextClick={openText}/>
+      }
+      {page === 'ReadingArea' &&
+      <p>{openedText.title}</p>
+      // <ReadingArea text={openedText}/>
+      }
     </>
   );
 }
