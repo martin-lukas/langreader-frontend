@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import Axios from "axios";
+import axios from '../util/axiosInstance';
 // import ReadingArea from "./ReadingArea";
 
 const App = () => {
   const [helloMsg, setHelloMsg] = useState('');
 
   useEffect(() => {
-    Axios.get('http://localhost:8080/api/hello')
+    axios.get('/hello')
       .then(response => setHelloMsg(response.data))
       .catch(err => console.error(err));
   }, []);
