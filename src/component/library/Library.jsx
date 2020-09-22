@@ -1,16 +1,17 @@
 import React from 'react';
-import useTexts from "../../hook/FetchHook";
-import LibraryItem from "./LibraryItem";
+import fetchText from "../../hook/FetchTextHook";
 
-const Library = ({onTextClick}) => {
-  const texts = useTexts('/texts');
+const Library = () => {
+  const texts = fetchText.titles();
 
   return (
-    <>
-      {texts.map(text => (
-        <LibraryItem text={text} onClick={onTextClick} key={text.id}/>
-      ))}
-    </>
+    <ul>
+    {texts.map(text => (
+      <li key={text.id}>
+        <a href={`/reading/${text.id}`}>{text.title}</a>
+      </li>
+    ))}
+    </ul>
   );
 };
 

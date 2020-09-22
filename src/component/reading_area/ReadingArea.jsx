@@ -1,16 +1,31 @@
 import React from 'react';
+import fetchText from "../../hook/FetchTextHook";
 // import Word from "./Word";
 
-const ReadingArea = ({parsedText}) => {
+const ReadingArea = ({textId}) => {
+  /**
+   * @type {Object}
+   * @property {Array} paragraphs[]
+   */
+  const parsedText = fetchText.parsedById(textId);
+
   return (
     <>
-      {parsedText.map(paragraph => (
-        <p>
-          {paragraph.map(token => (
-            <span style={(token.type) ? {border: "1px solid black"} : {}}>{token.value}</span>
-          ))}
-        </p>
-      ))}
+      {!parsedText &&
+      <h2>Loading...</h2>
+      }
+      {parsedText &&
+      <>
+        <h2>{parsedText.title}</h2>
+        {parsedText.paragraphs.map((paragraph, index) => (
+          <p key={index}>
+            {paragraph.map((token, index) => (
+              <span style={{border: token.type ? "1px solid black" : "none"}} key={index}>{token.value}</span>
+            ))}
+          </p>
+        ))}
+      </>
+      }
     </>
   );
 };
