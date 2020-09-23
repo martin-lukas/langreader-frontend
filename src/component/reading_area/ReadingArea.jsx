@@ -1,6 +1,7 @@
 import React from 'react';
 import fetchText from "../../hook/FetchTextHook";
-// import Word from "./Word";
+import Word from "./Word";
+import '../../asset/css/reading.css';
 
 const ReadingArea = ({textId}) => {
   /**
@@ -19,9 +20,12 @@ const ReadingArea = ({textId}) => {
         <h2>{parsedText.title}</h2>
         {parsedText.paragraphs.map((paragraph, index) => (
           <p key={index}>
-            {paragraph.map((token, index) => (
-              <span style={{border: token.type ? "1px solid black" : "none"}} key={index}>{token.value}</span>
-            ))}
+            {paragraph.map((token, index) => {
+              return (token.type)
+                ? <Word word={token} key={index}/>
+                : <>{token.value}</>;
+            })
+            }
           </p>
         ))}
       </>

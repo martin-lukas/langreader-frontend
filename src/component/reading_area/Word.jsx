@@ -1,10 +1,11 @@
 import React from 'react';
+import '../../asset/css/words.css';
 
-const Word = ({wordObj}) => {
+const Word = ({word}) => {
   return (
-    <>
-      {wordObj.value}
-    </>
+    <a href="#" className={word.type}>
+      {word.value}
+    </a>
   );
 };
 
