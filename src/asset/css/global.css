@@ -1,0 +1,96 @@
+:root {
+    --active-el-color: #4994d4;
+    --active-el-color-light: #67b6f6;
+    --active-el-color-dark: #2175bf;
+    --active-el-color-darker: rgba(1, 95, 168, 0.82);
+    --active-el-color-darkest: rgba(0, 79, 141, 0.76);
+    --default-text-color: #333;
+    --input-border-gray: #e5e5e5;
+    --input-border-gray-light: #f0f0f0;
+    --input-border-gray-dark: #bbbbbb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:focus, *:visited, *:active, *:hover {
+    outline: 0 !important;
+}
+
+*::-moz-focus-inner {
+    border: 0;
+}
+
+html, body, ul, li, a, button, form, textarea, input {
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    color: var(--default-text-color);
+}
+
+hr {
+    border: 1px solid var(--active-el-color);
+}
+
+ul, li {
+    list-style: none;
+}
+
+h1, h2 {
+    color: var(--active-el-color-darker);
+}
+
+h1 {
+    font-size: 2.2em;
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.6em;
+    margin: 25px 0 15px 0;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin: 0.9em 0 0.2em 0;
+}
+
+p {
+    margin: 20px 0;
+}
+
+input, textarea {
+    border: 2px groove var(--input-border-gray);
+    border-radius: 5px;
+    font-size: 0.95em;
+    padding: 8px;
+    width: 100%;
+}
+
+input:focus, textarea:focus {
+    border: 2px groove var(--active-el-color-light);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}

@@ -1,0 +1,145 @@
+#reading-page {
+  font-size: 1.1em;
+  user-select: none;
+}
+
+#loading-div {
+  text-align: center;
+}
+
+#back-button {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  color: var(--active-el-color);
+  cursor: pointer;
+  font-size: 2.2em;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+
+  &:hover {
+    color: var(--active-el-color-dark);
+  }
+}
+
+#fixed-toolbar {
+  align-content: space-evenly;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  height: 3em;
+  left: 0;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.fixed-button {
+  font-size: 2em;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+#know-button {
+  background-color: #23f607;
+}
+
+#study-button {
+  background-color: #faf63d;
+}
+
+#ignore-button {
+  background-color: #beb4c1;
+}
+
+p {
+  line-height: 1.6;
+}
+
+.word {
+  display: inline-block;
+  position: relative;
+}
+
+.word button {
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: var(--default-text-color);
+  cursor: pointer;
+  display: inline;
+  font-size: 1.05em;
+  padding: 0 2px;
+  text-decoration: none;
+
+  &:focus {
+    outline: 0;
+    padding: 1px 0;
+  }
+}
+
+.KNOWN {
+  background-color: white;
+
+  &:focus {
+    border: 2px solid #23f607;
+  }
+}
+
+.STUDIED {
+  background-color: #faf63d;
+
+  &:focus {
+    border: 2px solid #fadb0f;
+  }
+}
+
+.IGNORED {
+  background-color: white;
+
+  &:focus {
+    border: 2px solid #beb4c1;
+  }
+}
+
+.UNKNOWN {
+  background-color: #d2e7fc;
+
+  &:focus {
+    border: 2px solid #96c8ff;
+  }
+}
+
+.translation {
+  background-color: #282828;
+  border-radius: 6px;
+  bottom: 120%;
+  color: #fff;
+  font-size: 0.9em;
+  left: 50%;
+  margin-left: -60px;
+  max-width: 200px;
+  min-width: 120px;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  visibility: hidden;
+  z-index: 1;
+
+  &::after {
+    border-color: black transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px;
+    content: "";
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    top: 100%;
+  }
+}
+
+.toggled {
+  visibility: visible;
+}

@@ -1,0 +1,294 @@
+#container {
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto;
+  max-width: 850px;
+  min-width: 210px;
+}
+
+#header {
+  background-color: #333;
+  color: var(--active-el-color);
+  font-family: 'Dancing Script', cursive;
+  font-size: 40px;
+  padding: 5px 0 10px 0;
+  text-align: center;
+  text-shadow: 0 2px var(--active-el-color-darker);
+  user-select: none;
+
+  @media screen and (min-width: 500px) {
+    font-size: 60px;
+  }
+}
+
+#content-area {
+  padding: 20px;
+}
+
+#top-nav {
+  background-color: var(--default-text-color);
+  border-radius: 0 0 10px 10px;
+  border-top: 2px groove var(--active-el-color);
+  overflow: hidden;
+  user-select: none;
+}
+
+.right-aligned {
+  float: right;
+}
+
+#top-nav a.nav-link, button.icon {
+  border: none;
+  color: #f2f2f2;
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-weight: bold;
+  overflow: visible;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#top-nav a.lang-link {
+  color: var(--active-el-color-light);
+}
+
+#top-nav a.lang-link.active-nav-item {
+  color: white;
+}
+
+.active-nav-item {
+  background-color: var(--active-el-color);
+  color: white;
+}
+
+.active-nav-item:hover {
+  background-color: var(--active-el-color-dark);
+}
+
+#top-nav a:hover {
+  background-color: #eee;
+  color: var(--default-text-color);
+}
+
+/* Hide the link that should open and close the top-nav on small screens */
+#top-nav .icon {
+  background: none;
+  display: none;
+}
+
+/* When the screen is less than 550 pixels wide, hide all links */
+@media screen and (max-width: 550px) {
+  #top-nav a:not(.always-visible) {
+    display: none;
+  }
+
+  #top-nav .icon {
+    display: block;
+    float: right;
+  }
+
+  #top-nav .icon:hover {
+    background-color: #333;
+  }
+}
+
+/* The "responsive" class is added to the top-nav with JavaScript when the user clicks
+on the icon. This class makes the top-nav look good on small screens (display the links
+vertically instead of horizontally) */
+@media screen and (max-width: 550px) {
+  #top-nav.responsive {
+    position: relative;
+  }
+
+  #top-nav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  #top-nav.responsive .icon:hover {
+    background-color: #333;
+  }
+
+  #top-nav.responsive a {
+    display: block;
+    float: none;
+    text-align: left;
+  }
+
+  #top-nav.responsive .right-aligned {
+    float: none;
+  }
+}
+
+#footer {
+  color: #5a5a5a;
+  font-size: 1em;
+  padding: 20px 0 10px 0;
+  text-align: center;
+}
+
+#footer a {
+  color: #5a5a5a;
+  text-decoration: underline;
+}
+
+#footer a:hover {
+  color: var(--default-text-color);
+}
+
+#library {
+  text-align: right;
+}
+
+#library-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#add-text-btn {
+  background-color: var(--active-el-color);
+  border: none;
+  border-radius: 20%;
+  color: white;
+  cursor: pointer;
+  font-size: 1.4em;
+  margin-left: 10px;
+  outline: 0;
+  padding: 2px 10px;
+}
+
+#add-text-btn:hover, #add-text-btn.toggled {
+  background-color: var(--active-el-color-dark);
+}
+
+.text-item-div {
+  border: 1px solid #747474;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.text-item-edit-btn, .text-item-del-btn {
+  background-color: white;
+  border-color: var(--input-border-gray);
+  border-style: solid;
+  border-width: 0 0 0 1px;
+  color: var(--input-border-gray-dark);
+  cursor: pointer;
+  font-size: 1.1em;
+  outline: 0;
+  padding: 2px 8px;
+}
+
+.text-item-del-btn {
+  border-radius: 0 10px 10px 0;
+}
+
+.text-item-edit-btn:hover {
+  background-color: #fffbaa;
+  color: #c9b502;
+}
+
+.text-item-del-btn:hover {
+  background-color: #f5d0c9;
+  color: #dc0b0b;
+}
+
+.text-item-link {
+  border-radius: 10px 0 0 10px;
+  color: var(--default-text-color);
+  display: block;
+  font-size: 1.1em;
+  font-weight: bold;
+  outline: 0;
+  overflow: hidden;
+  padding: 12px;
+  text-align: left;
+  text-decoration: none;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--input-border-gray-light);
+  }
+}
+
+#add-text-area {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 13px 13px;
+  text-align: left;
+}
+
+#method-btns-area {
+  padding: 0 0 10px 0;
+}
+
+.method-btn {
+  background-color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--input-border-gray-dark);
+  color: var(--default-text-color);
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0 0 0 10px;
+  outline: 0;
+  padding: 3px 8px;
+
+  &:hover {
+    background-color: var(--input-border-gray);
+  }
+
+  &:focus {
+    background-color: var(--input-border-gray-dark);
+  }
+}
+
+.lower-form-group {
+  margin-top: 10px;
+}
+
+#add-text-area textarea {
+  height: 150px;
+  resize: none;
+}
+
+#add-button-div {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+#add-text-area button {
+  background-color: var(--active-el-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 10px;
+  outline: 0;
+  padding: 8px 15px;
+
+  &:hover, &:focus {
+    background-color: var(--active-el-color-dark);
+  }
+}
+
+.error-div {
+  color: #990008;
+  display: inline-block;
+  font-size: 1em;
+  margin: 8px 10px;
+}
