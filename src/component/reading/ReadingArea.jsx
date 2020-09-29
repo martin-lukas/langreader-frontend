@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import '../../asset/css/reading.scss';
 import Word from './Word';
-import {updatedText, focusOn} from "./readingUtils";
+import {updatedText, focusOn, resetTranslationTooltips, translate} from "./readingUtils";
 import {addWordToDB, updateWordInDB, removeWordFromDB} from "../../service/WordService";
 
 const ReadingArea = (props) => {
@@ -22,12 +22,15 @@ const ReadingArea = (props) => {
   }, [text]);
 
   const onWordClick = (e, word) => {
+    resetTranslationTooltips();
     focusedWord.current = e.target;
-    // if (e.target.className === 'STUDIED') {
-    // }
+    if (e.target.className === 'STUDIED') {
+      translate(e, word);
+    }
   };
 
   const onKeyPress = (e, word) => {
+    resetTranslationTooltips();
     switch (e.keyCode) {
       case 37:
         moveFocus(false, !e.shiftKey);
@@ -42,6 +45,7 @@ const ReadingArea = (props) => {
       case 83:
         setNextFocusMove(true, !e.shiftKey);
         updateWord(word, 'STUDIED');
+        translate(e, word);
         break;
       case 68:
         setNextFocusMove(true, !e.shiftKey);
@@ -77,7 +81,7 @@ const ReadingArea = (props) => {
 
   const moveFocus = (forward, skipDecided) => {
     const current = focusedWord.current;
-    const words = document.querySelectorAll('.word button');
+    const words = document.querySelectorAll('.tooltip button');
     let wordToFocus = null;
     for (let i = 0; i < words.length; i++) {
       if (words[i] === current) {

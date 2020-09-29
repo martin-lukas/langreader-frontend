@@ -23,6 +23,10 @@
   }
 }
 
+#reading-area {
+  font-size: 1.05em;
+}
+
 #fixed-toolbar {
   align-content: space-evenly;
   bottom: 0;
@@ -59,12 +63,12 @@ p {
   line-height: 1.6;
 }
 
-.word {
+.tooltip {
   display: inline-block;
   position: relative;
 }
 
-.word button {
+.tooltip button {
   border-radius: 4px;
   box-sizing: border-box;
   color: var(--default-text-color);
@@ -112,7 +116,7 @@ p {
   }
 }
 
-.translation {
+.tooltip-text {
   background-color: #282828;
   border-radius: 6px;
   bottom: 120%;
@@ -140,6 +144,6 @@ p {
   }
 }
 
-.toggled {
+.tooltip-toggled .tooltip-text {
   visibility: visible;
 }

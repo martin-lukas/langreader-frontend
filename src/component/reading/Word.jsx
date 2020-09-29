@@ -3,7 +3,7 @@ import '../../asset/css/reading.scss';
 
 const Word = ({token, onClick, onKeyPress}) => {
   return (
-    <span className="word">
+    <span className="tooltip">
       <button
         className={token.type}
         onClick={(e) => onClick(e, token)}
@@ -11,7 +11,7 @@ const Word = ({token, onClick, onKeyPress}) => {
       >
         {token.value}
       </button>
-      <span className="translation"/>
+      <span className="tooltip-text"/>
     </span>
   );
 };
