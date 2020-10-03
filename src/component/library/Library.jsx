@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import fetchText from "../../service/TextService";
+import {useHistory, Link, useParams} from 'react-router-dom';
+import {fetchTitles, deleteTextFromDB} from "../../service/TextService";
 
 const Library = () => {
+  const {reload} = useParams();
+  const history = useHistory();
   const [texts, setTexts] = useState([]);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    fetchText.titles()
+    fetchTitles()
       .then(response => setTexts(response.data))
       .catch(err => console.error(err));
-  }, []);
+  }, [reload]);
 
   const filteredTexts = (searchQuery) => {
     return texts.filter(text => {
@@ -22,20 +24,23 @@ const Library = () => {
     setQuery(e.target.value);
   };
 
+  const handleEdit = (id) => {
+    history.push(`/edittext/${id}`);
+  };
+
+  const handleDelete = (id) => {
+    deleteTextFromDB(id);
+    setTexts(texts.filter(aText => aText.id !== id))
+  };
+
   return (
     <div id="library">
       <div id="library-toolbar">
-        <input
-          type="text"
-          placeholder="Search.."
-          onKeyUp={updateQuery}
-        />
-        {/*<button id="add-text-btn" onClick={toggleAddTextForm}*/}
-        {/*        className={isToggledAddText ? 'toggled' : null}>*/}
-        {/*  <i className="fas fa-plus"/>*/}
-        {/*</button>*/}
+        <input type="text" placeholder="Search.." onKeyUp={updateQuery}/>
+        <Link to={'/addtext'} id="add-text-btn">
+          <i className="fas fa-plus"/>
+        </Link>
       </div>
-      {/*<AddTextForm v-if="isToggledAddText" addText="splitTextAndAddToDB"/>*/}
       {filteredTexts(query).map(text => (
         <div className="text-item-div" key={text.id}>
           <Link
@@ -45,10 +50,10 @@ const Library = () => {
           >
             {text.title}
           </Link>
-          <button className="text-item-edit-btn">
+          <button className="text-item-edit-btn" onClick={() => handleEdit(text.id)}>
             <i className="far fa-edit"/>
           </button>
-          <button className="text-item-del-btn">
+          <button className="text-item-del-btn" onClick={() => handleDelete(text.id)}>
             <i className="fas fa-ban"/>
           </button>
         </div>

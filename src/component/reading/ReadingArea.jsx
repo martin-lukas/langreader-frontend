@@ -32,34 +32,34 @@ const ReadingArea = (props) => {
   const onKeyPress = (e, word) => {
     resetTranslationTooltips();
     switch (e.keyCode) {
-      case 37:
+      case 37: // <-
         moveFocus(false, !e.shiftKey);
         break;
-      case 39:
+      case 39: // ->
         moveFocus(true, !e.shiftKey);
         break;
-      case 65:
+      case 65: // A
         setNextFocusMove(true, !e.shiftKey);
-        updateWord(word, 'KNOWN');
+        updateWordInText(word, 'KNOWN');
         break;
-      case 83:
+      case 83: // S
         setNextFocusMove(true, !e.shiftKey);
-        updateWord(word, 'STUDIED');
+        updateWordInText(word, 'STUDIED');
         translate(e, word);
         break;
-      case 68:
+      case 68: // D
         setNextFocusMove(true, !e.shiftKey);
-        updateWord(word, 'IGNORED');
+        updateWordInText(word, 'IGNORED');
         break;
-      case 82:
-        updateWord(word, 'UNKNOWN');
+      case 82: // R
+        updateWordInText(word, 'UNKNOWN');
         break;
       default:
-        return;
+        break;
     }
   };
 
-  const updateWord = (word, newType) => {
+  const updateWordInText = (word, newType) => {
     const oldType = word.type;
     if (oldType === newType) {
       if (newType !== 'UNKNOWN') {

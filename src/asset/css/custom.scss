@@ -94,9 +94,6 @@
   }
 }
 
-/* The "responsive" class is added to the top-nav with JavaScript when the user clicks
-on the icon. This class makes the top-nav look good on small screens (display the links
-vertically instead of horizontally) */
 @media screen and (max-width: 550px) {
   #top-nav.responsive {
     position: relative;
@@ -139,6 +136,22 @@ vertically instead of horizontally) */
   color: var(--default-text-color);
 }
 
+.back-button {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  color: var(--active-el-color);
+  cursor: pointer;
+  font-size: 2.2em;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+
+  &:hover {
+    color: var(--active-el-color-dark);
+  }
+}
+
 #library {
   text-align: right;
 }
@@ -155,14 +168,15 @@ vertically instead of horizontally) */
   border-radius: 20%;
   color: white;
   cursor: pointer;
+  display: inline;
   font-size: 1.4em;
   margin-left: 10px;
   outline: 0;
-  padding: 2px 10px;
-}
+  padding: 6px 10px;
 
-#add-text-btn:hover, #add-text-btn.toggled {
-  background-color: var(--active-el-color-dark);
+  &:hover {
+    background-color: var(--active-el-color-dark);
+  }
 }
 
 .text-item-div {
@@ -219,7 +233,7 @@ vertically instead of horizontally) */
   }
 }
 
-#add-text-area {
+.add-text-form {
   background-color: #f2f2f2;
   border-radius: 5px;
   margin-top: 10px;
@@ -257,7 +271,7 @@ vertically instead of horizontally) */
   margin-top: 10px;
 }
 
-#add-text-area textarea {
+.add-text-form textarea {
   height: 150px;
   resize: none;
 }
@@ -269,7 +283,7 @@ vertically instead of horizontally) */
   justify-content: space-between;
 }
 
-#add-text-area button {
+.add-text-form button {
   background-color: var(--active-el-color);
   border: none;
   border-radius: 5px;

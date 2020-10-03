@@ -7,22 +7,6 @@
   text-align: center;
 }
 
-#back-button {
-  background-color: white;
-  border: none;
-  border-radius: 50%;
-  color: var(--active-el-color);
-  cursor: pointer;
-  font-size: 2.2em;
-  margin: 0;
-  outline: 0;
-  padding: 0;
-
-  &:hover {
-    color: var(--active-el-color-dark);
-  }
-}
-
 #reading-area {
   font-size: 1.05em;
 }

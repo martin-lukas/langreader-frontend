@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import '../../asset/css/reading.scss';
-import fetchText from "../../service/TextService";
+import {fetchParsedText} from "../../service/TextService";
 import ReadingArea from "./ReadingArea";
+import BackButton from "../common/BackButton";
 
 const ReadingPage = () => {
   const {textId} = useParams();
   const [fetchedText, setFetchedText] = useState();
 
   useEffect(() => {
-    fetchText.parsedById(textId)
-      .then(response => setFetchedText(response.data))
+    let isCancelled = false;
+    fetchParsedText(textId)
+      .then(response => {
+        if (!isCancelled) {
+          setFetchedText(response.data);
+        }
+      })
       .catch(err => console.error(err));
+
+    return () => {isCancelled = true};
   }, [textId]);
 
   return (
     <div id="reading-page">
-      <BackButton/>
+      <BackButton to="/library"/>
       {!fetchedText && <Loader/>}
       {fetchedText && <ReadingArea text={fetchedText}/>}
     </div>
@@ -24,14 +32,6 @@ const ReadingPage = () => {
 };
 
 export default ReadingPage;
-
-const BackButton = () => {
-  return (
-    <Link to="/library" id="back-button">
-      <i className="far fa-arrow-alt-circle-left"/>
-    </Link>
-  );
-};
 
 const Loader = () => {
   return (

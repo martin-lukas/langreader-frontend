@@ -6,6 +6,7 @@ import Library from './library/Library';
 import NotFoundPage from "./NotFoundPage";
 import ReadingPage from "./reading/ReadingPage";
 import TopNavigation from "./navigation/TopNavigation";
+import TextForm from "./library/TextForm";
 
 const App = () => {
   return (
@@ -15,8 +16,14 @@ const App = () => {
         <TopNavigation/>
         <div id="content-area">
           <Switch>
-            <Route exact path={["/", "/library"]}>
+            <Route exact path={['/', '/library', '/library/:reload']}>
               <Library/>
+            </Route>
+            <Route exact path="/addtext">
+              <TextForm/>
+            </Route>
+            <Route exact path="/edittext/:textId">
+              <TextForm/>
             </Route>
             <Route path="/reading/:textId">
               <ReadingPage/>
