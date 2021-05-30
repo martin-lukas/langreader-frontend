@@ -1,0 +1,16 @@
+.add-lang-button {
+    font-size: 1em;
+    font-weight: bold;
+    background-color: var(--active-el-color);
+    color: white;
+    padding: 6px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: 0;
+    cursor: pointer;
+
+    &:hover, &:focus {
+        background-color: var(--active-el-color-dark);
+    }
+}
