@@ -1,6 +1,6 @@
-import {WordType} from "./Word";
+import {TokenType} from "./TokenType";
 
 export interface Token {
-    type: WordType;
+    type: TokenType;
     value: string;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../../css/reading.scss';
-import { Word, WordType } from '../../model/Word';
+import { TokenType } from '../../model/TokenType';
 import { getUpdatedParsedText } from "../../utils/readingUtils";
 import { focus } from "../../utils/webutil";
 import { addWordToDB, removeWordFromDB, updateWordInDB } from "../../services/WordService";
@@ -64,35 +64,35 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
         }
     };
 
-    const updateWordInTextAndMove = (word: Word, newType: WordType, isShiftPressed: boolean) => {
+    const updateWordInTextAndMove = (token: Token, newType: TokenType, isShiftPressed: boolean) => {
         nextFocusMove.current = !isShiftPressed ? { direction: Direction.FORWARD, skipDecided: !isShiftPressed } : null;
-        const oldType = word.type;
+        const oldType = token.type;
         if (oldType === newType) {
             nextFocusMove.current && moveFocus(nextFocusMove.current);
             nextFocusMove.current = DEFAULT_FOCUS_MOVE;
         } else {
-            word.type = newType;
-            setEditedText(getUpdatedParsedText(editedText, word));
+            token.type = newType;
+            setEditedText(getUpdatedParsedText(editedText, token));
 
-            if (oldType === WordType.UNKNOWN) {
-                addWordToDB(word);
-            } else if (newType !== WordType.UNKNOWN) {
-                updateWordInDB(word);
+            if (oldType === TokenType.UNKNOWN) {
+                addWordToDB(token);
+            } else if (newType !== TokenType.UNKNOWN) {
+                updateWordInDB(token);
             } else {
-                removeWordFromDB(word);
+                removeWordFromDB(token);
             }
             // The move will happen in useEffect after finishing update and rerender
         }
     };
 
-    const handleWordClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleWordClick = (event: React.MouseEvent) => {
         // @ts-ignore
         focusedWord.current = event.target;
         // @ts-ignore
-        return event.target.className === WordType.STUDIED.toString();
+        return event.target.className === TokenType.STUDIED.toString();
     };
 
-    const handleWordKeyPress = (event: React.KeyboardEvent, word: Word) => {
+    const handleWordKeyPress = (event: React.KeyboardEvent, token: Token) => {
         let shouldTranslate = false;
         const shiftPressed = event.shiftKey;
         
@@ -104,17 +104,17 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
                 moveFocus({ direction: Direction.FORWARD, skipDecided: !shiftPressed });
                 break;
             case 65: // A
-                updateWordInTextAndMove(word, WordType.KNOWN, shiftPressed);
+                updateWordInTextAndMove(token, TokenType.KNOWN, shiftPressed);
                 break;
             case 83: // S
-                updateWordInTextAndMove(word, WordType.STUDIED, shiftPressed);
+                updateWordInTextAndMove(token, TokenType.STUDIED, shiftPressed);
                 shouldTranslate = true;
                 break;
                 case 68: // D
-                updateWordInTextAndMove(word, WordType.IGNORED, shiftPressed);
+                updateWordInTextAndMove(token, TokenType.IGNORED, shiftPressed);
                 break;
             case 82: // R
-                updateWordInTextAndMove(word, WordType.UNKNOWN, shiftPressed);
+                updateWordInTextAndMove(token, TokenType.UNKNOWN, shiftPressed);
                 break;
             default:
                 break;

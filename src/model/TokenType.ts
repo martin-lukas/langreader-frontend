@@ -1,9 +1,4 @@
-export interface Word {
-    value: string;
-    type: WordType;
-}
-
-export enum WordType {
+export enum TokenType {
     KNOWN = 'KNOWN',
     STUDIED = 'STUDIED',
     IGNORED = 'IGNORED',
