@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 import { Text } from "../model/Text";
 import { ParsedText } from "../model/ParsedText";
 
-const BASE_URL = '/texts';
+const BASE_URL = "/texts";
 
 export const fetchTitles = (): Promise<AxiosResponse<Array<Text>>> => {
     return axios.get<Array<Text>>(BASE_URL);

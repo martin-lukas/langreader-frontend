@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
-import '../../css/reading.scss';
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import "../../css/reading.scss";
 import {fetchParsedText} from "../../services/TextService";
 import ReadingArea from "./ReadingArea";
 import BackButton from "../library/BackButton";
 import Loader from "./Loader";
-import { ParsedText } from '../../model/ParsedText';
+import { ParsedText } from "../../model/ParsedText";
 
 const ReadingPage = () => {
     const {textId} = useParams<{textId: string}>();

@@ -1,7 +1,7 @@
 import axios from "../utils/axiosInstance";
 import { Token } from "../model/Token";
 
-const BASE_URL = '/words';
+const BASE_URL = "/words";
 
 export const addWordToDB = (word: Token): void => {
     axios.post(BASE_URL, word)

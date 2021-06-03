@@ -2,7 +2,7 @@ import axios from "../utils/axiosInstance";
 import { AxiosResponse } from "axios";
 import {Language} from "../model/Language";
 
-const BASE_URL = '/langs';
+const BASE_URL = "/langs";
 
 export const fetchAllLangs = (): Promise<AxiosResponse<Array<Language>>> => {
     return axios.get<Array<Language>>(`${BASE_URL}/all`);

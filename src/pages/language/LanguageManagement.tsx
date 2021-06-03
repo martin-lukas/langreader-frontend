@@ -1,7 +1,7 @@
-import * as React from 'react';
-import {useEffect, useState} from 'react';
-import classNames from 'classnames';
-import '../../css/language.scss';
+import * as React from "react";
+import {useEffect, useState} from "react";
+import classNames from "classnames";
+import "../../css/language.scss";
 import {addUserLang, fetchAllLangs, fetchUserLangs, removeUserLang} from "../../services/LanguageService";
 import ListItem from "../library/ListItem";
 import {Language} from "../../model/Language";
@@ -90,7 +90,7 @@ const LanguageManagement: React.FC<LanguageManagementProps> = ({chosenLang, onLa
             <ListItem
                 key={userLang.id}
                 cssClasses={classNames({
-                    'chosen-item': userLang.id === chosenLang.id
+                    "chosen-item": userLang.id === chosenLang.id
                 })}
                 onDelete={userLang.id !== chosenLang.id && (() => handleRemoveUserLang(userLang))}
             >

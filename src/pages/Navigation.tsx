@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import {Link} from "react-router-dom";
-import { User } from '../model/User';
+import { User } from "../model/User";
 
 interface HeaderProps {
     activeUser: User | null;
@@ -9,16 +9,16 @@ interface HeaderProps {
 const Navigation: React.FC<HeaderProps> = ({activeUser}) => {
     const toggleTopNav = (event: any) => {
         event.stopPropagation();
-        const navBarElement = document.getElementById('top-nav');
+        const navBarElement = document.getElementById("top-nav");
         if (navBarElement) {
-            navBarElement.className = navBarElement.className ? '' : 'responsive';
+            navBarElement.className = navBarElement.className ? "" : "responsive";
         }
     };
     
     const collapseTopNav = () => {
-        const navBarElement = document.getElementById('top-nav');
+        const navBarElement = document.getElementById("top-nav");
         if (navBarElement) {
-            navBarElement.className = '';
+            navBarElement.className = "";
         }
     };
     if (!activeUser) {

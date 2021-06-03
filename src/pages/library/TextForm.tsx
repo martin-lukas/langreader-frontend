@@ -1,6 +1,6 @@
-import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import * as React from "react";
+import {useEffect, useState} from "react";
+import {useHistory, useParams} from "react-router-dom";
 import BackButton from "./BackButton";
 import {addTextToDB, fetchText, updateTextInDB} from "../../services/TextService";
 import {focusById} from "../../utils/webutil";
@@ -9,8 +9,8 @@ import { Text } from "../../model/Text";
 const TextForm = () => {
     const {textId} = useParams<{textId: string}>();
     const history = useHistory();
-    const [fields, setFields] = useState({title: '', text: ''});
-    const [error, setError] = useState('');
+    const [fields, setFields] = useState({title: "", text: ""});
+    const [error, setError] = useState("");
     
     useEffect(() => {
         if (textId) {
@@ -29,14 +29,14 @@ const TextForm = () => {
             }
         }
         
-        focusById('input-title');
+        focusById("input-title");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     const validate = (formData: {title: string, text: string}) => {
-        let errorMsg = '';
-        errorMsg = errorMsg + (formData.title.trim() ? '' : 'Title can\'t be empty. ');
-        errorMsg = errorMsg + (formData.text.trim() ? '' : 'Text can\'t be empty. ');
+        let errorMsg = "";
+        errorMsg = errorMsg + (formData.title.trim() ? "" : "Title can't be empty. ");
+        errorMsg = errorMsg + (formData.text.trim() ? "" : "Text can't be empty. ");
         setError(errorMsg);
         return !errorMsg;
     };
@@ -49,7 +49,7 @@ const TextForm = () => {
         if (validate(fields)) {
             const text: Text = {id: textId, title: fields.title, text: fields.text};
             const apiCall = textId ? updateTextInDB : addTextToDB;
-            apiCall(text, () => history.push('/library'));
+            apiCall(text, () => history.push("/library"));
         }
     };
     
@@ -67,7 +67,7 @@ const TextForm = () => {
                     <textarea id="input-text" name="text" onChange={handleChange} defaultValue={fields.text}/>
                 </div>
                 <div id="add-button-div">
-                    <button onClick={handleSubmit}>{textId ? 'Update' : 'Add'}</button>
+                    <button onClick={handleSubmit}>{textId ? "Update" : "Add"}</button>
                     {error && <div className="error-div">{error}</div>}
                 </div>
             </div>

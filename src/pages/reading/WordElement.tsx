@@ -1,6 +1,6 @@
-import React from 'react';
-import '../../css/reading.scss';
-import useTranslation from "../../hooks/TranslationHook";
+import React, { useState } from "react";
+import axios from "axios";
+import "../../css/reading.scss";
 import {Token} from "../../model/Token";
 
 interface WordElementProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -10,14 +10,19 @@ interface WordElementProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyPress}) => {
-    const [translation, translate] = useTranslation(token.value);
+    const [translation, setTranslation] = useState<string | null>(null);
     
     const handleTranslation = (event: React.MouseEvent | React.KeyboardEvent) => {
         event.persist();
         if (translation) {
             showTranslation(event);
         } else {
-            translate && translate(() => showTranslation(event));
+            axios.get("/translate", {params: {word: token.value}})
+                .then((response) => {
+                    setTranslation(response.data.toLowerCase());
+                    showTranslation(event);
+                })
+                .catch((err) => console.log(err.response.data));
         }
     };
     
@@ -38,15 +43,14 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
     };
 
     const showTranslation = (event: React.MouseEvent | React.KeyboardEvent) => {
-        const toggledClassName = 'tooltip tooltip-toggled';
-        // @ts-ignore
+        const toggledClassName = "tooltip tooltip-toggled";
         const wordElement = event.target.parentElement;
         wordElement.className = toggledClassName;
     };
     
     const resetTranslationTooltips = () => {
-        Array.from(document.getElementsByClassName('tooltip-toggled')).forEach(toggledTooltip => {
-            toggledTooltip.className = 'tooltip';
+        Array.from(document.getElementsByClassName("tooltip-toggled")).forEach(toggledTooltip => {
+            toggledTooltip.className = "tooltip";
         });
     };
     
@@ -60,7 +64,7 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
                 {token.value}
             </button>
             <span className="tooltip-text">
-                {(translation as any)?.toLowerCase()}
+                {translation}
             </span>
         </span>
     );

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { User } from '../model/User';
+import React from "react";
+import { Link } from "react-router-dom";
+import { User } from "../model/User";
 
 interface HeaderProps {
     activeUser: User | null;

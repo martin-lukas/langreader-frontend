@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
-    const separator = ' | ';
+    const separator = " | ";
     return (
         <div id="footer">
             &copy; {new Date().getFullYear()} Martin Lukáš

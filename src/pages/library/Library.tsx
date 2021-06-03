@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {useHistory, Link} from 'react-router-dom';
+import React, {useEffect, useState} from "react";
+import {useHistory, Link} from "react-router-dom";
 import {fetchTitles, deleteTextFromDB} from "../../services/TextService";
 import ListItem from "./ListItem";
-import {Text} from '../../model/Text';
-import { Language } from '../../model/Language';
+import {Text} from "../../model/Text";
+import { Language } from "../../model/Language";
 
 interface LibraryProps {
     chosenLang: Language;
@@ -43,7 +43,7 @@ const Library: React.FC<LibraryProps> = ({chosenLang}) => {
         <div id="library">
             <div id="library-toolbar">
                 <input type="text" placeholder="Search.." onKeyUp={updateQuery}/>
-                <Link to={'/addtext'} id="add-text-btn">
+                <Link to={"/addtext"} id="add-text-btn">
                     <i className="fas fa-plus"/>
                 </Link>
             </div>

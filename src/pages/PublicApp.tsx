@@ -1,13 +1,13 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import React from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "../css/custom.scss";
-import Header from './Header';
-import Navigation from './Navigation';
-import Footer from './Footer';
+import Header from "./Header";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
 import Error from "./Error";
 import NotFoundPage from "./NotFoundPage";
-import Homepage from './homepage/Homepage';
-import { User } from '../model/User';
+import Homepage from "./homepage/Homepage";
+import { User } from "../model/User";
 
 interface PublicAppProps {
     activeUser: User | null;

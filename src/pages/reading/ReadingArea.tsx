@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import '../../css/reading.scss';
-import { TokenType } from '../../model/TokenType';
+import React, { useEffect, useRef, useState } from "react";
+import "../../css/reading.scss";
+import { TokenType } from "../../model/TokenType";
 import { getUpdatedParsedText } from "../../utils/readingUtils";
 import { focus } from "../../utils/webutil";
 import { addWordToDB, removeWordFromDB, updateWordInDB } from "../../services/WordService";
 import WordElement from "./WordElement";
-import { ParsedText } from '../../model/ParsedText';
-import { Token } from '../../model/Token';
+import { ParsedText } from "../../model/ParsedText";
+import { Token } from "../../model/Token";
 
 interface ReadingAreaProps {
     text: ParsedText;
@@ -30,7 +30,7 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
     const nextFocusMove = useRef<FocusMoveOptions | null>(null);
 
     const moveFocus = (moveOptions: FocusMoveOptions) => {
-        const words = document.querySelectorAll('.tooltip button');
+        const words = document.querySelectorAll(".tooltip button");
         let wordToFocus = null;
         for (let i = 0; i < words.length; i++) {
             if (words[i] === focusedWord.current) {
@@ -47,7 +47,7 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
                             ) && !wordToFocus;
                         j = j + moveOptions.direction
                     ) {
-                        if (words[j].className === 'UNKNOWN') {
+                        if (words[j].className === "UNKNOWN") {
                             wordToFocus = words[j];
                         }
                     }

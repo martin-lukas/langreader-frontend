@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "../css/custom.scss";
-import { fetchChosenLang, updateChosenLang } from '../services/LanguageService';
-import Header from './Header';
-import Navigation from './Navigation';
-import Footer from './Footer';
+import { fetchChosenLang, updateChosenLang } from "../services/LanguageService";
+import Header from "./Header";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
 import Library from "./library/Library";
 import TextForm from "./library/TextForm";
 import ReadingPage from "./reading/ReadingPage";
@@ -12,8 +12,8 @@ import LanguageManagement from "./language/LanguageManagement";
 import Profile from "./profile/Profile";
 import Error from "./Error";
 import NotFoundPage from "./NotFoundPage";
-import { Language } from '../model/Language';
-import { User } from '../model/User';
+import { Language } from "../model/Language";
+import { User } from "../model/User";
 
 interface PrivateAppProps {
     activeUser: User;
@@ -41,7 +41,7 @@ const PrivateApp: React.FC<PrivateAppProps> = ({activeUser}) => {
                 <Navigation activeUser={activeUser}/>
                 <div id="content-area">
                     <Switch>
-                        <Route exact path={['/', '/library', '/library/:reload']}>
+                        <Route exact path={["/", "/library", "/library/:reload"]}>
                             <Library chosenLang={chosenLang}/>
                         </Route>
                         <Route exact path="/addtext">
