@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "../../css/reading.scss";
 import {Token} from "../../model/Token";
+import { translateWord } from "../../services/TranslationService";
 
 interface WordElementProps extends React.HTMLAttributes<HTMLDivElement> {
     token: Token;
@@ -17,7 +17,7 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
         if (translation) {
             showTranslation(event);
         } else {
-            axios.get("/translate", {params: {word: token.value}})
+            translateWord(token.value)
                 .then((response) => {
                     setTranslation(response.data.toLowerCase());
                     showTranslation(event);
@@ -44,6 +44,7 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
 
     const showTranslation = (event: React.MouseEvent | React.KeyboardEvent) => {
         const toggledClassName = "tooltip tooltip-toggled";
+        // @ts-ignore
         const wordElement = event.target.parentElement;
         wordElement.className = toggledClassName;
     };
