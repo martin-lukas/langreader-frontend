@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../css/reading.scss";
 import {Token} from "../../model/Token";
 import { translateWord } from "../../services/TranslationService";
+import { decodeHTMLEntities } from "../../utils/webutil";
 
 interface WordElementProps extends React.HTMLAttributes<HTMLDivElement> {
     token: Token;
@@ -19,7 +20,7 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
         } else {
             translateWord(token.value)
                 .then((response) => {
-                    setTranslation(response.data.toLowerCase());
+                    setTranslation(decodeHTMLEntities(response.data).toLowerCase());
                     showTranslation(event);
                 })
                 .catch((err) => console.log(err.response.data));
