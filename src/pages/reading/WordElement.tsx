@@ -4,16 +4,16 @@ import {Token} from "../../model/Token";
 import { translateWord } from "../../services/TranslationService";
 import { decodeHTMLEntities } from "../../utils/webutil";
 
-interface WordElementProps extends React.HTMLAttributes<HTMLDivElement> {
+interface WordElementProps extends React.HTMLAttributes<HTMLElement> {
     token: Token;
-    onWordClick: (event: React.MouseEvent, token: Token) => boolean;
-    onWordKeyPress: (event: React.KeyboardEvent,  token: Token) => boolean;
+    onWordClick: (event: React.MouseEvent<HTMLElement>) => boolean;
+    onWordKeyPress: (event: React.KeyboardEvent<HTMLElement>,  token: Token) => boolean;
 }
 
 const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyPress}) => {
     const [translation, setTranslation] = useState<string | null>(null);
     
-    const handleTranslation = (event: React.MouseEvent | React.KeyboardEvent) => {
+    const handleTranslation = (event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
         event.persist();
         if (translation) {
             showTranslation(event);
@@ -27,15 +27,15 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
         }
     };
     
-    const handleClick = (event: React.MouseEvent) => {
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         resetTranslationTooltips();
-        const shouldTranslate = onWordClick(event, token);
+        const shouldTranslate = onWordClick(event);
         if (shouldTranslate) {
             handleTranslation(event);
         }
     };
     
-    const handleKeyPress = (event: React.KeyboardEvent) => {
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLElement>) => {
         resetTranslationTooltips();
         const shouldTranslate = onWordKeyPress(event, token);
         if (shouldTranslate) {
@@ -43,11 +43,12 @@ const WordElement: React.FC<WordElementProps> = ({token, onWordClick, onWordKeyP
         }
     };
 
-    const showTranslation = (event: React.MouseEvent | React.KeyboardEvent) => {
-        const toggledClassName = "tooltip tooltip-toggled";
-        // @ts-ignore
-        const wordElement = event.target.parentElement;
-        wordElement.className = toggledClassName;
+    const showTranslation = (event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => {
+        const target = event.target as HTMLElement;
+        const wordElement = target.parentElement;
+        if (wordElement) {
+            wordElement.className = "tooltip tooltip-toggled";
+        }
     };
     
     const resetTranslationTooltips = () => {

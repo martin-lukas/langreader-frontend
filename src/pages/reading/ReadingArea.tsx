@@ -26,12 +26,12 @@ const DEFAULT_FOCUS_MOVE = { direction: Direction.FORWARD, skipDecided: true };
 
 const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
     const [editedText, setEditedText] = useState<ParsedText>(text);
-    const focusedWord = useRef<HTMLDivElement>();
+    const focusedWord = useRef<HTMLElement>();
     const nextFocusMove = useRef<FocusMoveOptions | null>(null);
 
     const moveFocus = (moveOptions: FocusMoveOptions) => {
-        const words = document.querySelectorAll(".tooltip button");
-        let wordToFocus = null;
+        const words: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip button");
+        let wordToFocus: HTMLElement | null = null;
         for (let i = 0; i < words.length; i++) {
             if (words[i] === focusedWord.current) {
                 const startFrom = i + moveOptions.direction;
@@ -47,7 +47,7 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
                             ) && !wordToFocus;
                         j = j + moveOptions.direction
                     ) {
-                        if (words[j].className === "UNKNOWN") {
+                        if (words[j].className === TokenType.UNKNOWN) {
                             wordToFocus = words[j];
                         }
                     }
@@ -57,9 +57,7 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
         }
 
         if (wordToFocus) {
-            // @ts-ignore
             focus(wordToFocus);
-            // @ts-ignore
             focusedWord.current = wordToFocus;
         }
     };
@@ -85,14 +83,13 @@ const ReadingArea: React.FC<ReadingAreaProps> = ({ text }) => {
         }
     };
 
-    const handleWordClick = (event: React.MouseEvent) => {
-        // @ts-ignore
-        focusedWord.current = event.target;
-        // @ts-ignore
-        return event.target.className === TokenType.STUDIED.toString();
+    const handleWordClick = (event: React.MouseEvent<HTMLElement>) => {
+        const target = event.target as HTMLElement;
+        focusedWord.current = target;
+        return target.className === TokenType.STUDIED;
     };
 
-    const handleWordKeyPress = (event: React.KeyboardEvent, token: Token) => {
+    const handleWordKeyPress = (event: React.KeyboardEvent<HTMLElement>, token: Token) => {
         let shouldTranslate = false;
         const shiftPressed = event.shiftKey;
         

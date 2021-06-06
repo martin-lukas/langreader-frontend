@@ -92,7 +92,7 @@ const LanguageManagement: React.FC<LanguageManagementProps> = ({chosenLang, onLa
                 cssClasses={classNames({
                     "chosen-item": userLang.id === chosenLang.id
                 })}
-                onDelete={userLang.id !== chosenLang.id && (() => handleRemoveUserLang(userLang))}
+                onDelete={(userLang.id !== chosenLang.id) ? () => handleRemoveUserLang(userLang) : undefined}
             >
                 {/* TODO: rework so this is a button and not a link */}
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
