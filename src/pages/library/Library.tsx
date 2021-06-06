@@ -3,13 +3,8 @@ import {useHistory, Link} from "react-router-dom";
 import {fetchTitles, deleteTextFromDB} from "../../services/TextService";
 import ListItem from "./ListItem";
 import {Text} from "../../model/Text";
-import { Language } from "../../model/Language";
 
-interface LibraryProps {
-    chosenLang: Language;
-}
-
-const Library: React.FC<LibraryProps> = ({chosenLang}) => {
+const Library: React.FC = () => {
     const history = useHistory();
     const [texts, setTexts] = useState<Text[]>([]);
     const [query, setQuery] = useState("");
@@ -49,7 +44,11 @@ const Library: React.FC<LibraryProps> = ({chosenLang}) => {
             </div>
             
             {filteredTexts(query).map(text => (
-                <ListItem onEdit={() => handleEdit(text)} onDelete={() => handleDelete(text)} key={text.id}>
+                <ListItem
+                    onEdit={() => handleEdit(text)}
+                    onDelete={() => handleDelete(text)}
+                    key={text.id}
+                >
                     <Link className="list-item-content" to={`/reading/${text.id}`}>
                         {text.title}
                     </Link>

@@ -42,7 +42,7 @@ const PrivateApp: React.FC<PrivateAppProps> = ({activeUser}) => {
                 <div id="content-area">
                     <Switch>
                         <Route exact path={["/", "/library", "/library/:reload"]}>
-                            <Library chosenLang={chosenLang}/>
+                            <Library/>
                         </Route>
                         <Route exact path="/addtext">
                             <TextForm/>
