@@ -8,6 +8,8 @@ import Error from "./Error";
 import NotFoundPage from "./NotFoundPage";
 import Homepage from "./homepage/Homepage";
 import { User } from "../model/User";
+import Login from "./login/Login";
+import Signup from "./signup/Signup";
 
 interface PublicAppProps {
     activeUser: User | null;
@@ -23,6 +25,12 @@ const PublicApp: React.FC<PublicAppProps> = ({activeUser}) => {
                     <Switch>
                         <Route exact path="/">
                             <Homepage/>
+                        </Route>
+                        <Route exact path="/login">
+                            <Login/>
+                        </Route>
+                        <Route exact path="/signup">
+                            <Signup/>
                         </Route>
                         <Route path="/error">
                             <Error/>

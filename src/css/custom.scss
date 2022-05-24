@@ -330,8 +330,15 @@
 }
 
 .error-div {
-    color: #990008;
     display: inline-block;
+    padding: 12px;
+    vertical-align: middle;
+    color: #990008;
+    background-color: #fde6e6;
     font-size: 1em;
     margin: 8px 10px;
+
+    /*margin-bottom: 15px;*/
+    border: 1px solid #a80303;
+    border-radius: 3px;
 }
