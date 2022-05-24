@@ -4,7 +4,10 @@ import "../../css/auth.scss";
 const Login: React.FC = () => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const loading = false;
+    const [loading, setLoading] = useState<boolean>(false);
+    const [isSubmitted, setSubmitted] = useState<boolean>(false);
+
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     const handleSubmit = (event: any): void => {
         event.preventDefault();
@@ -13,7 +16,9 @@ const Login: React.FC = () => {
     return (
         <div id="login-view" className="auth-view">
             <h3>Login Page</h3>
-            <div className="error-div" v-if="errMessage">{"errMessage"}</div>
+            {errorMessage && (
+                <div className="error-div">{errorMessage}</div>
+            )}
             <div className="auth-form">
                 <form name="form" onSubmit={handleSubmit}>
                     <div>

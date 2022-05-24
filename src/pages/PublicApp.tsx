@@ -7,20 +7,15 @@ import Footer from "./Footer";
 import Error from "./Error";
 import NotFoundPage from "./NotFoundPage";
 import Homepage from "./homepage/Homepage";
-import { User } from "../model/User";
 import Login from "./login/Login";
 import Signup from "./signup/Signup";
 
-interface PublicAppProps {
-    activeUser: User | null;
-}
-
-const PublicApp: React.FC<PublicAppProps> = ({activeUser}) => {
+const PublicApp: React.FC = () => {
     return (
         <div id="container">
             <Router>
-                <Header activeUser={activeUser}/>
-                <Navigation activeUser={activeUser}/>
+                <Header/>
+                <Navigation/>
                 <div id="content-area">
                     <Switch>
                         <Route exact path="/">

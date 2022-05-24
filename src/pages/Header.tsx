@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { User } from "../model/User";
 
 interface HeaderProps {
-    activeUser: User | null;
+    activeUser?: User;
 }
 
 const Header: React.FC<HeaderProps> = ({activeUser}) => {
