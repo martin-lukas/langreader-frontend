@@ -9,6 +9,7 @@ import NotFoundPage from "./NotFoundPage";
 import Homepage from "./homepage/Homepage";
 import Login from "./login/Login";
 import Signup from "./signup/Signup";
+import Tutorial from "./tutorial/Tutorial";
 
 const PublicApp: React.FC = () => {
     return (
@@ -20,6 +21,9 @@ const PublicApp: React.FC = () => {
                     <Switch>
                         <Route exact path="/">
                             <Homepage/>
+                        </Route>
+                        <Route exact path="/tutorial">
+                            <Tutorial/>
                         </Route>
                         <Route exact path="/login">
                             <Login/>

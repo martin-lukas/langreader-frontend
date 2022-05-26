@@ -25,6 +25,7 @@ const Navigation: React.FC<HeaderProps> = ({activeUser}) => {
         return (
             <nav id="top-nav" onClick={collapseTopNav}>
                 <Link to="/" className="always-visible nav-link">Home</Link>
+                <Link to="/tutorial" className="always-visible nav-link">Tutorial</Link>
                 <div className="right-aligned">
                     <Link to="/login" className="nav-link lang-link">Log In</Link>
                     <Link to="/signup" className="nav-link lang-link">Sign Up</Link>
