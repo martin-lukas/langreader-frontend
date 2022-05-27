@@ -329,16 +329,22 @@
     }
 }
 
-.error-div {
+.info-div, .error-div {
     display: inline-block;
     padding: 12px;
     vertical-align: middle;
+    font-size: 1em;
+    margin-bottom: 15px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+.info-div {
+    color: rgba(0, 97, 10, 0.91);
+    background-color: #e6fdec;
+    border-color: #019925;
+}
+.error-div {
     color: #990008;
     background-color: #fde6e6;
-    font-size: 1em;
-    margin: 8px 10px;
-
-    /*margin-bottom: 15px;*/
-    border: 1px solid #a80303;
-    border-radius: 3px;
+    border-color: #a80303;
 }

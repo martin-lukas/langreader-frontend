@@ -32,7 +32,7 @@ const Signup: React.FC = () => {
                 startLoading();
                 signupUser(username, password, nativeLanguage)
                     .then(() => {
-                        setInfoMessage("You registered successfully!");
+                        setInfoMessage("Registration successful! You can log in now.");
                         setUsername("");
                         setPassword("");
                         setConfirmPassword("");
