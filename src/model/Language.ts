@@ -1,4 +1,5 @@
 export interface Language {
-    id: string;
+    id: number;
+    code: string;
     fullName: string;
 }

@@ -22,7 +22,8 @@ const Login: React.FC = () => {
         startLoading();
         loginUser(username, password)
             .then((response) => {
-                setActiveUser({...response.data, password});
+                const fetchedUser = response.data;
+                setActiveUser({...fetchedUser, password});
             })
             .finally(() => {
                 window.location.reload();

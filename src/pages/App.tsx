@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Route, Switch} from "react-router-dom";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import "../css/custom.scss";
 import {AppContext} from "../context/AppContext";
 import Header from "./Header";
@@ -12,7 +11,7 @@ import Homepage from "./homepage/Homepage";
 import Login from "./login/Login";
 import Signup from "./signup/Signup";
 import {Language} from "../model/Language";
-import {fetchAllLangs} from "../services/LanguageService";
+import {fetchAllLangs, updateChosenLang} from "../services/LanguageService";
 import Library from "./library/Library";
 import TextForm from "./library/TextForm";
 import ReadingPage from "./reading/ReadingPage";
@@ -24,15 +23,25 @@ import Loader from "./common/Loader";
 import {useLoader} from "./common/LoaderHook";
 import {User} from "../model/User";
 import PublicRoute from "./PublicRoute";
-import {getActiveUser, setActiveUser} from "../utils/storageUtils";
+import {loadActiveUser, loadChosenLang, loadNativeLang, storeActiveUser, storeChosenLang} from "../utils/storageUtils";
 
 const App = () => {
     const {isLoading, stopLoading} = useLoader();
 
     const [allLanguages, setAllLanguages] = useState<Language[]>();
+    const [chosenLang, setChosenLang] = useState<Language | undefined>(loadChosenLang());
 
     const handleActiveUserChange = (user?: User): void => {
-        setActiveUser(user);
+        storeActiveUser(user);
+    };
+
+    const handleChosenLangChange = async (newChosenLang: Language): Promise<void> => {
+        updateChosenLang(newChosenLang)
+            .then(() => {
+                storeChosenLang(newChosenLang);
+                setChosenLang(loadChosenLang());
+                return Promise.resolve();
+            });
     };
 
     useEffect(() => {
@@ -55,8 +64,11 @@ const App = () => {
         <div id="container">
             <AppContext.Provider value={{
                 allLanguages,
-                activeUser: getActiveUser(),
+                activeUser: loadActiveUser(),
                 setActiveUser: (user) => handleActiveUserChange(user),
+                chosenLang,
+                setChosenLang: (newChosenLang) => handleChosenLangChange(newChosenLang),
+                nativeLang: loadNativeLang(),
             }}>
                 <BrowserRouter>
                     <Header/>

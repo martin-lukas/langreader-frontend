@@ -13,23 +13,17 @@ export const fetchUserLangs = (): Promise<AxiosResponse<Array<Language>>> => {
     return axios.get<Array<Language>>(BASE_URL, getBasicAuthenticationConfig());
 };
 
-export const fetchChosenLang = (): Promise<AxiosResponse<Language>> => {
-    return axios.get<Language>(`${BASE_URL}/chosen`, getBasicAuthenticationConfig());
+export const updateChosenLang = (lang: Language): Promise<AxiosResponse<void>> => {
+    return axios.put(`${BASE_URL}/chosen`, lang, getBasicAuthenticationConfig());
 };
 
-export const updateChosenLang = (lang: Language): void => {
-    axios.put(`${BASE_URL}/chosen`, lang, getBasicAuthenticationConfig())
-        .catch(err => console.error(err.response.data));
+export const addUserLang = (lang: Language): Promise<AxiosResponse<void>> => {
+    return axios.post(BASE_URL, lang, getBasicAuthenticationConfig());
 };
 
-export const addUserLang = (lang: Language): void => {
-    axios.post(BASE_URL, lang, getBasicAuthenticationConfig())
-        .catch(err => console.error(err.response.data));
-};
-
-export const removeUserLang = (lang: Language): void => {
-    axios.delete(BASE_URL, {
+export const removeUserLang = (lang: Language): Promise<AxiosResponse<void>> => {
+    return axios.delete(BASE_URL, {
         params: {id: lang.id},
         ...getBasicAuthenticationConfig()
-    }).catch(err => console.error(err.response.data));
+    });
 };
