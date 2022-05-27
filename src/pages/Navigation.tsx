@@ -1,12 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { User } from "../model/User";
+import {useAppContext} from "../context/AppContext";
 
-interface HeaderProps {
-    activeUser?: User;
-}
+const Navigation: React.FC = () => {
+    const {activeUser} = useAppContext();
 
-const Navigation: React.FC<HeaderProps> = ({activeUser}) => {
     const toggleTopNav = (event: any) => {
         event.stopPropagation();
         const navBarElement = document.getElementById("top-nav");
@@ -21,6 +19,7 @@ const Navigation: React.FC<HeaderProps> = ({activeUser}) => {
             navBarElement.className = "";
         }
     };
+
     if (!activeUser) {
         return (
             <nav id="top-nav" onClick={collapseTopNav}>

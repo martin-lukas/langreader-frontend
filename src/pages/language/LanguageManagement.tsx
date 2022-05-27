@@ -5,16 +5,14 @@ import "../../css/language.scss";
 import {addUserLang, fetchAllLangs, fetchUserLangs, removeUserLang} from "../../services/LanguageService";
 import ListItem from "../library/ListItem";
 import {Language} from "../../model/Language";
+import {useAppContext} from "../../context/AppContext";
 
-interface LanguageManagementProps {
-    chosenLang: Language;
-    onLanguageChange: (lang: Language) => void;
-}
-
-const LanguageManagement: React.FC<LanguageManagementProps> = ({chosenLang, onLanguageChange}) => {
+const LanguageManagement: React.FC = () => {
     const [allLangs, setAllLangs] = useState<Language[]>([]);
     const [userLangs, setUserLangs] = useState<Language[]>([]);
     const [selectedLangId, setSelectedLangId] = useState<string | undefined>();
+    const {activeUser} = useAppContext();
+    const chosenLang = activeUser?.chosenLang;
     
     const setUserLangsSorted = (langs: Language[]) => {
         langs.sort((a, b) => (a.fullName).localeCompare(b.fullName, "en"));
@@ -90,16 +88,16 @@ const LanguageManagement: React.FC<LanguageManagementProps> = ({chosenLang, onLa
             <ListItem
                 key={userLang.id}
                 cssClasses={classNames({
-                    "chosen-item": userLang.id === chosenLang.id
+                    "chosen-item": userLang.id === chosenLang?.id
                 })}
-                onDelete={(userLang.id !== chosenLang.id) ? () => handleRemoveUserLang(userLang) : undefined}
+                onDelete={(userLang.id !== chosenLang?.id) ? () => handleRemoveUserLang(userLang) : undefined}
             >
                 {/* TODO: rework so this is a button and not a link */}
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a
                     className="list-item-content"
                     href="#"
-                    onClick={() => onLanguageChange(userLang)}
+                    onClick={() => {/* TODO: update context with userLang */}}
                 >
                     {userLang.fullName}
                 </a>

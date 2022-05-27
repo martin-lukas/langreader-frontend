@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { User } from "../model/User";
+import {useAppContext} from "../context/AppContext";
 
-interface HeaderProps {
-    activeUser?: User;
-}
+const Header: React.FC = () => {
+    const {activeUser, setActiveUser} = useAppContext();
 
-const Header: React.FC<HeaderProps> = ({activeUser}) => {
+    const handleLogout = () => {
+        setActiveUser(undefined);
+        window.location.reload();
+    };
+
     return (
         <div id="header">
             LangReader
@@ -14,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({activeUser}) => {
                 {activeUser &&
                 <>
                     <Link to="/profile">{activeUser.username}</Link>
-                    <span> (Logout)</span>
+                    <button onClick={handleLogout}>(Logout)</button>
                 </>
                 }
             </div>

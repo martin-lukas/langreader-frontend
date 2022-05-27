@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loader = () => {
+const Login: React.FC = () => {
     return (
         <div id="loading-div">
             <h3>Loading...</h3>
@@ -8,4 +8,4 @@ const Loader = () => {
     );
 };
 
-export default Loader;
+export default Login;

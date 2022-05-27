@@ -1,17 +1,39 @@
 import React, {useState} from "react";
 import "../../css/auth.scss";
+import {loginUser} from "../../services/AuthService";
+import {useLoader} from "../common/LoaderHook";
+import Loader from "../common/Loader";
+import {useAppContext} from "../../context/AppContext";
+import { Redirect } from "react-router-dom";
 
 const Login: React.FC = () => {
+    const {activeUser, setActiveUser} = useAppContext();
+    const {isLoading, startLoading} = useLoader(false);
+
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
     const [isSubmitted, setSubmitted] = useState<boolean>(false);
 
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     const handleSubmit = (event: any): void => {
         event.preventDefault();
+
+        startLoading();
+        loginUser(username, password)
+            .then((response) => {
+                setActiveUser({...response.data, password});
+            })
+            .finally(() => {
+                window.location.reload();
+            });
     };
+
+    if (isLoading) return <Loader/>;
+
+    if (activeUser) {
+        return <Redirect to="/library"/>;
+    }
 
     return (
         <div id="login-view" className="auth-view">
@@ -42,7 +64,7 @@ const Login: React.FC = () => {
                         />
                     </div>
                     <div className="auth-submit-button-div lower-form-group">
-                        <button disabled={loading} className="auth-submit-button">
+                        <button className="auth-submit-button">
                             Login
                         </button>
                     </div>

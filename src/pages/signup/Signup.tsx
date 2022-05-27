@@ -2,10 +2,10 @@ import React, {useContext, useState} from "react";
 import "../../css/auth.scss";
 import {signupUser} from "../../services/AuthService";
 import {Language} from "../../model/Language";
-import {AppContext} from "../../context/AppContextType";
+import {AppContext, useAppContext} from "../../context/AppContext";
 
 const Signup: React.FC = () => {
-    const context = useContext(AppContext);
+    const context = useAppContext();
     const allLanguages = context.allLanguages as Language[];
 
     const [username, setUsername] = useState<string>("");

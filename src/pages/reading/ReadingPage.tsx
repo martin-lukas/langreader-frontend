@@ -4,8 +4,8 @@ import "../../css/reading.scss";
 import {fetchParsedText} from "../../services/TextService";
 import ReadingArea from "./ReadingArea";
 import BackButton from "../library/BackButton";
-import Loader from "./Loader";
 import { ParsedText } from "../../model/ParsedText";
+import Loader from "../common/Loader";
 
 const ReadingPage = () => {
     const {textId} = useParams<{textId: string}>();
