@@ -1,10 +1,13 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import "../../css/auth.scss";
 import {signupUser} from "../../services/AuthService";
 import {Language} from "../../model/Language";
-import {AppContext, useAppContext} from "../../context/AppContext";
+import {useAppContext} from "../../context/AppContext";
+import {useLoader} from "../common/LoaderHook";
+import Loader from "../common/Loader";
 
 const Signup: React.FC = () => {
+    const {isLoading, startLoading, stopLoading} = useLoader(false);
     const context = useAppContext();
     const allLanguages = context.allLanguages as Language[];
 
@@ -12,13 +15,9 @@ const Signup: React.FC = () => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [nativeLanguage, setNativeLanguage] = useState<Language>();
-    const [loading, setLoading] = useState<boolean>(false);
-    const [isSubmitted, setSubmitted] = useState<boolean>(false);
-    const [isSuccessful, setSuccessful] = useState<boolean>(false);
+
     const [infoMessage, setInfoMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
-
-    console.log(nativeLanguage)
 
     const handleNativeLanguageChange = (event: any) => {
         setNativeLanguage(allLanguages[event.target.value]);
@@ -26,24 +25,32 @@ const Signup: React.FC = () => {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        setLoading(true);
-        if (username && password) {
-            try {
-                await signupUser(username, password);
-                if (false) {
-                    // dispatch('lang/fetchUserLangs');
-                    // dispatch('lang/fetchChosenLang');
-                    // dispatch('lang/fetchNativeLang');
-                }
-                // this.$router.push('/');
-            } catch (error) {
-                setLoading(false);
-                setErrorMessage("Incorrect username or password. Please try again.");
+        setInfoMessage("");
+        setErrorMessage("");
+        if (username && password && confirmPassword && nativeLanguage) {
+            if (password === confirmPassword) {
+                startLoading();
+                signupUser(username, password, nativeLanguage)
+                    .then(() => {
+                        setInfoMessage("You registered successfully!");
+                        setUsername("");
+                        setPassword("");
+                        setConfirmPassword("");
+                        setNativeLanguage(undefined);
+                    })
+                    .catch(() => {
+                        setErrorMessage("The registration wasn't successfull. Please try again later.");
+                    })
+                    .finally(stopLoading);
+            } else {
+                setErrorMessage("Make sure the passwords match.");
             }
         } else {
-            setLoading(false);
+            setErrorMessage("Make sure you fill out all the fields.");
         }
     };
+
+    if (isLoading) return <Loader/>;
 
     return (
         <div id="signup-view" className="auth-view">
@@ -100,7 +107,7 @@ const Signup: React.FC = () => {
                         </select>
                     </div>
                     <div className="auth-submit-button-div lower-form-group">
-                        <button className="auth-submit-button" disabled={loading}>Login</button>
+                        <button className="auth-submit-button">Login</button>
                     </div>
                 </form>
             </div>
