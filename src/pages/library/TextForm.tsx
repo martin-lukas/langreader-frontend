@@ -30,7 +30,6 @@ const TextForm = () => {
         }
         
         focusById("input-title");
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     const validate = (formData: {title: string, text: string}) => {

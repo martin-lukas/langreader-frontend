@@ -58,7 +58,6 @@ const LanguageManagement: React.FC = () => {
         const isInUserLangs = (langId: string) => userLangs.map(userLang => userLang.id).indexOf(langId) === -1;
         const filteredLangs = allLangs.filter(lang => isInUserLangs(lang.id));
         setAllLangs(filteredLangs);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userLangs]);
     
     return (

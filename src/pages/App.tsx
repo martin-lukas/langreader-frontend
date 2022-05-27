@@ -41,7 +41,6 @@ const App = () => {
                 setAllLanguages(response.data);
             })
             .finally(stopLoading);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (isLoading) {
