@@ -5,21 +5,24 @@ import {useAppContext} from "../context/AppContext";
 const Header: React.FC = () => {
     const {activeUser, setActiveUser} = useAppContext();
 
-    const handleLogout = () => {
+    const handleLogout = (event: React.MouseEvent<HTMLAnchorElement>): void => {
+        event.preventDefault();
         setActiveUser(undefined);
         window.location.reload();
     };
 
     return (
         <div id="header">
-            LangReader
+            <div className="heading">
+                LangReader
+            </div>
             <div className="profile-info">
-                {activeUser &&
-                <>
-                    <Link to="/profile">{activeUser.username}</Link>
-                    <button onClick={handleLogout}>(Logout)</button>
-                </>
-                }
+                {activeUser && (
+                    <>
+                        <Link to="/profile">{activeUser.username}</Link>
+                        <a href="" onClick={handleLogout} className="logout-link">(Logout)</a>
+                    </>
+                )}
             </div>
         </div>
     );
