@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TermsOfService = () => {
+const TermsOfService: React.FC = () => {
     return (
         <div>
             <h2>Terms of Service</h2>

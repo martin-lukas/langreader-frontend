@@ -24,6 +24,7 @@ import {useLoader} from "./common/LoaderHook";
 import {User} from "../model/User";
 import {loadActiveUser, loadChosenLang, loadNativeLang, storeActiveUser, storeChosenLang} from "../utils/storageUtils";
 import TermsOfService from "./tos/TermsOfService";
+import PrivacyPolicy from "./privacy/PrivacyPolicy";
 
 const App = () => {
     const {isLoading, stopLoading} = useLoader();
@@ -90,6 +91,9 @@ const App = () => {
                             </Route>
                             <Route exact path="/tos">
                                 <TermsOfService/>
+                            </Route>
+                            <Route exact path="/privacy">
+                                <PrivacyPolicy/>
                             </Route>
                             {/* PRIVATE */}
                             <AuthenticatedRoute exact path={["/library", "/library/:reload"]}>
