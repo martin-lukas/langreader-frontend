@@ -35,11 +35,14 @@ const LanguageManagement: React.FC = () => {
 
             if (selectedLang) {
                 startLoading();
-                addUserLang(selectedLang)
-                    .then(() => {
-                        setUserLanguages(prevState => sortLanguages(prevState.concat(selectedLang)));
-                    })
-                    .finally(stopLoading);
+                Promise.all([
+                    addUserLang(selectedLang)
+                        .then(() => {
+                            setUserLanguages(prevState => sortLanguages(prevState.concat(selectedLang)));
+                        }),
+                    // Always select the newest added user language
+                    setChosenLang(selectedLang),
+                ]).finally(stopLoading);
             }
         }
     };
