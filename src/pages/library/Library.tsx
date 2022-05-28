@@ -12,18 +12,19 @@ const Library: React.FC = () => {
 
     const [texts, setTexts] = useState<Text[]>([]);
     const [query, setQuery] = useState("");
-    const [showNoChosenLangMessage, setShowNoChosenLangMessage] = useState<boolean>(false);
-    
+    const [noChosenLanguageYet, setNoChosenLanguageYet] = useState<boolean>(false);
+    const noTextsYet = !noChosenLanguageYet && texts.length === 0;
+
     useEffect(() => {
         startLoading();
         fetchTitles()
             .then(response => {
                 setTexts(response.data);
-                setShowNoChosenLangMessage(false);
+                setNoChosenLanguageYet(false);
             })
             .catch((err) => {
                 if (err.response && err.response.status === 422) { // Case of not having a chosen language yet
-                    setShowNoChosenLangMessage(true);
+                    setNoChosenLanguageYet(true);
                 }
             })
             .finally(stopLoading);
@@ -49,23 +50,25 @@ const Library: React.FC = () => {
     };
 
     if (isLoading) return <Loader/>
-    
+
     return (
         <div id="library">
-            <div id="library-toolbar">
-                <input type="text" placeholder="Search.." onKeyUp={updateQuery}/>
-                <Link to={"/addtext"} id="add-text-btn">
-                    <i className="fas fa-plus"/>
-                </Link>
-            </div>
+            {!noChosenLanguageYet && (
+                <div id="library-toolbar">
+                    <input type="text" placeholder="Search.." onKeyUp={updateQuery}/>
+                    <Link to={"/addtext"} id="add-text-btn">
+                        <i className="fas fa-plus"/>
+                    </Link>
+                </div>
+            )}
 
-            {showNoChosenLangMessage && (
+            {noChosenLanguageYet && (
                 <div className="library-info-message">
                     <p>You haven't chosen a language to study yet. Go to <b>Manage languages</b> to choose one.</p>
                 </div>
             )}
 
-            {!showNoChosenLangMessage && texts.length === 0 && (
+            {noTextsYet && (
                 <div className="library-info-message">
                     <p>You don't have any texts in this language. Click the <b>+</b> button to add some.</p>
                 </div>

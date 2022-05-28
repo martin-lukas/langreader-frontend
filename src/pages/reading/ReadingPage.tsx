@@ -6,8 +6,10 @@ import ReadingArea from "./ReadingArea";
 import BackButton from "../library/BackButton";
 import { ParsedText } from "../../model/ParsedText";
 import Loader from "../common/Loader";
+import {useLoader} from "../common/LoaderHook";
 
 const ReadingPage = () => {
+    const {isLoading, stopLoading} = useLoader();
     const {textId} = useParams<{textId: string}>();
     const [fetchedText, setFetchedText] = useState<ParsedText>();
     
@@ -19,13 +21,16 @@ const ReadingPage = () => {
                     setFetchedText(response.data);
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => console.error(err))
+            .finally(stopLoading);
         
         return () => {
             isCancelled = true;
         };
     }, [textId]);
-    
+
+    if (isLoading) return <Loader/>;
+
     return (
         <div id="reading-page">
             <BackButton to="/library"/>
