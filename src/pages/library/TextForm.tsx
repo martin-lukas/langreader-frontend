@@ -5,8 +5,11 @@ import BackButton from "./BackButton";
 import {addTextToDB, fetchText, updateTextInDB} from "../../services/TextService";
 import {focusById} from "../../utils/webutil";
 import { Text } from "../../model/Text";
+import {useLoader} from "../common/LoaderHook";
+import Loader from "../common/Loader";
 
 const TextForm = () => {
+    const {isLoading, stopLoading} = useLoader();
     const {textId} = useParams<{textId: string}>();
     const history = useHistory();
     const [fields, setFields] = useState({title: "", text: ""});
@@ -22,7 +25,8 @@ const TextForm = () => {
                         setFields({...fields, title: fetchedText.title, text: fetchedText.text});
                     }
                 })
-                .catch(err => console.error(err));
+                .catch(err => console.error(err))
+                .finally(stopLoading);
             
             return () => {
                 isCancelled = true;
@@ -30,7 +34,8 @@ const TextForm = () => {
         }
         
         focusById("input-title");
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [textId]);
     
     const validate = (formData: {title: string, text: string}) => {
         let errorMsg = "";
@@ -51,7 +56,9 @@ const TextForm = () => {
             apiCall(text, () => history.push("/library"));
         }
     };
-    
+
+    if (isLoading) return <Loader/>;
+
     return (
         <div id="add-text-area">
             <BackButton to="/library"/>
