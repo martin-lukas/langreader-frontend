@@ -22,8 +22,8 @@ import AuthenticatedRoute from "./AuthenticatedRoute";
 import Loader from "./common/Loader";
 import {useLoader} from "./common/LoaderHook";
 import {User} from "../model/User";
-import PublicRoute from "./PublicRoute";
 import {loadActiveUser, loadChosenLang, loadNativeLang, storeActiveUser, storeChosenLang} from "../utils/storageUtils";
+import TermsOfService from "./tos/TermsOfService";
 
 const App = () => {
     const {isLoading, stopLoading} = useLoader();
@@ -76,18 +76,21 @@ const App = () => {
                     <div id="content-area">
                         <Switch>
                             {/* PUBLIC */}
-                            <PublicRoute exact path="/">
+                            <Route exact path="/">
                                 <Homepage/>
-                            </PublicRoute>
-                            <PublicRoute exact path="/tutorial">
+                            </Route>
+                            <Route exact path="/tutorial">
                                 <Tutorial/>
-                            </PublicRoute>
-                            <PublicRoute exact path="/login">
+                            </Route>
+                            <Route exact path="/login">
                                 <Login/>
-                            </PublicRoute>
-                            <PublicRoute exact path="/signup">
+                            </Route>
+                            <Route exact path="/signup">
                                 <Signup/>
-                            </PublicRoute>
+                            </Route>
+                            <Route exact path="/tos">
+                                <TermsOfService/>
+                            </Route>
                             {/* PRIVATE */}
                             <AuthenticatedRoute exact path={["/library", "/library/:reload"]}>
                                 <Library/>

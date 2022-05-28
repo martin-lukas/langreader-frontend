@@ -1,16 +1,17 @@
 import React from "react";
+import {Link } from "react-router-dom";
 
 const Footer = () => {
     const separator = " | ";
     return (
         <div id="footer">
-            &copy; {new Date().getFullYear()} Martin Lukáš
+            &copy; {new Date().getFullYear()} Martin Lukas
             {separator}
-            <a href="/contact">Contact Us</a>
+            <Link to="/contact">Contact Us</Link>
             {separator}
-            <a href="/tos">Terms of Service</a>
+            <Link to="/tos">Terms of Service</Link>
             {separator}
-            <a href="/privacy">Privacy Policy</a>
+            <Link to="/privacy">Privacy Policy</Link>
         </div>
     );
 };
