@@ -36,7 +36,7 @@ const Tutorial: React.FC = () => {
                 open, and all the individual words will be highlighted according to their current status.
                 Every word can be in one of the following states (represented by these colors):</p>
             <ul>
-                <li><span>unknown</span> - a word not yet encountered</li>
+                <li><span className="UNKNOWN">unknown</span> - a word not yet encountered</li>
                 <li><span className="KNOWN">known</span> - a word marked as already known</li>
                 <li><span className="STUDIED">studied</span> - a word marked for further study</li>
                 <li><span className="IGNORED">ignored</span> - a word marked as ignored
@@ -53,10 +53,10 @@ const Tutorial: React.FC = () => {
                 <span className="key arrow-key">→</span> arrow keys.</p>
             <p>You can mark words by keys:</p>
             <ul>
-                <li><span className="key a-key">a</span> - marks a word as <b>known</b></li>
-                <li><span className="key s-key">s</span> - marks a word as <b>studied</b></li>
-                <li><span className="key d-key">d</span> - marks a word as <b>ignored</b></li>
-                <li><span className="key r-key">r</span> - resets the state of a word (to <b>unknown</b>)</li>
+                <li><span className="key a-key">a</span> - marks a word as <span className="KNOWN">known</span></li>
+                <li><span className="key s-key">s</span> - marks a word as <span className="STUDIED">studied</span></li>
+                <li><span className="key d-key">d</span> - marks a word as <span className="IGNORED">ignored</span></li>
+                <li><span className="key r-key">r</span> - resets the state of a word (to <span className="UNKNOWN">unknown</span>)</li>
             </ul>
             <p>After each key press, every occurrence of the marked word in the text will change its
                 state,
