@@ -28,8 +28,9 @@ const Library: React.FC = () => {
                 }
             })
             .finally(stopLoading);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [history]);
-    
+
     const filteredTexts = (searchQuery: string) => {
         return texts.filter(text => {
             return text.title.toLowerCase().includes(searchQuery.toLowerCase());

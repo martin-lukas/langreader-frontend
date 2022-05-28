@@ -8,25 +8,30 @@ import { Redirect } from "react-router-dom";
 
 const Login: React.FC = () => {
     const {activeUser, setActiveUser} = useAppContext();
-    const {isLoading, startLoading} = useLoader(false);
+    const {isLoading, startLoading, stopLoading} = useLoader(false);
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [isSubmitted, setSubmitted] = useState<boolean>(false);
 
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     const handleSubmit = (event: any): void => {
         event.preventDefault();
 
+        if (!username || !password) {
+            setErrorMessage("Make sure you fill out all the fields.");
+            return;
+        }
         startLoading();
         loginUser(username, password)
             .then((response) => {
+                setErrorMessage("");
                 const fetchedUser = response.data;
                 setActiveUser({...fetchedUser, password});
-            })
-            .finally(() => {
                 window.location.reload();
+            }).catch(() => {
+                setErrorMessage("The login attempt was unsuccessful");
+                stopLoading();
             });
     };
 
