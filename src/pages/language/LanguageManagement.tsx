@@ -55,12 +55,13 @@ const LanguageManagement: React.FC = () => {
             .then(response => setUserLanguages(sortLanguages(response.data)))
             .catch(err => console.error(err))
             .finally(stopLoading);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     useEffect(() => {
         const filteredLangs = allLanguages.filter(lang => !existsLanguageById(userLanguages, lang.id));
         setAvailableLanguages(filteredLangs);
-    }, [userLanguages]);
+    }, [allLanguages, userLanguages]);
 
     if (isLoading) return <Loader/>;
     
@@ -88,6 +89,7 @@ const LanguageManagement: React.FC = () => {
                 onDelete={(userLang.id !== chosenLang?.id) ? () => handleRemoveUserLang(userLang) : undefined}
                 key={userLang.id}
             >
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className="list-item-content" href="" onClick={(e) => handleChosenLangChange(e, userLang)}>
                     {userLang.fullName}
                 </a>

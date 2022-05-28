@@ -20,6 +20,7 @@ const Header: React.FC = () => {
                 {activeUser && (
                     <>
                         <Link to="/profile">{activeUser.username}</Link>
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a href="" onClick={handleLogout} className="logout-link">(Logout)</a>
                     </>
                 )}
