@@ -25,6 +25,7 @@ import {User} from "../model/User";
 import {loadActiveUser, loadChosenLang, loadNativeLang, storeActiveUser, storeChosenLang} from "../utils/storageUtils";
 import TermsOfService from "./tos/TermsOfService";
 import PrivacyPolicy from "./privacy/PrivacyPolicy";
+import ContactUs from "./contact/ContactUs";
 
 const App = () => {
     const {isLoading, stopLoading} = useLoader();
@@ -88,6 +89,9 @@ const App = () => {
                             </Route>
                             <Route exact path="/signup">
                                 <Signup/>
+                            </Route>
+                            <Route exact path="/contact">
+                                <ContactUs/>
                             </Route>
                             <Route exact path="/tos">
                                 <TermsOfService/>
