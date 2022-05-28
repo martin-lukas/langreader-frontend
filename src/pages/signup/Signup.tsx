@@ -98,7 +98,7 @@ const Signup: React.FC = () => {
                             Select Your Native Language:
                         </label>
                         <select onChange={handleNativeLanguageChange} id="native-lang-select">
-                            <option value={undefined} selected>Choose Language</option>
+                            <option value={undefined} defaultValue={undefined}>Choose Language</option>
                             {allLanguages.map((language, index) => (
                                 <option value={index} key={language.id}>
                                     {language.fullName}
