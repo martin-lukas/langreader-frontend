@@ -9,7 +9,7 @@ import {useLoader} from "../common/LoaderHook";
 import Loader from "../common/Loader";
 
 const TextForm = () => {
-    const {isLoading, stopLoading} = useLoader();
+    const {isLoading, startLoading, stopLoading} = useLoader(false);
     const {textId} = useParams<{textId: string}>();
     const history = useHistory();
     const [fields, setFields] = useState({title: "", text: ""});
@@ -18,6 +18,7 @@ const TextForm = () => {
     useEffect(() => {
         if (textId) {
             let isCancelled = false;
+            startLoading();
             fetchText(textId)
                 .then(response => {
                     if (!isCancelled) {
