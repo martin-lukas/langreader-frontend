@@ -1,7 +1,7 @@
 import React from "react";
 import "../../css/public.scss";
 
-const Homepage = () => {
+const Homepage: React.FC = () => {
     return (
         <div id="home-view">
             <h1>Welcome to LangReader!</h1>

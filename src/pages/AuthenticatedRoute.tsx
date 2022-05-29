@@ -1,16 +1,16 @@
 import React from "react";
-import {Route, Redirect, RouteProps} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {useAppContext} from "../context/AppContext";
 
-export const AuthenticatedRoute: React.FC<RouteProps> = ({children, ...routeProps}) => {
+export const AuthenticatedRoute: React.FC = ({children}) => {
     const {activeUser} = useAppContext();
     return (
-        <Route {...routeProps}>
+        <>
             {activeUser
                 ? children
-                : <Redirect to="/login"/>
+                : <Navigate to="/login"/>
             }
-        </Route>
+        </>
     );
 };
 

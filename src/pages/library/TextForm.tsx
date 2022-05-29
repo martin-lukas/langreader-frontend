@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import BackButton from "./BackButton";
 import {addTextToDB, fetchText, updateTextInDB} from "../../services/TextService";
 import {focusById} from "../../utils/webutil";
@@ -11,7 +11,7 @@ import Loader from "../common/Loader";
 const TextForm = () => {
     const {isLoading, startLoading, stopLoading} = useLoader(false);
     const {textId} = useParams<{textId: string}>();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [fields, setFields] = useState({title: "", text: ""});
     const [error, setError] = useState("");
     
@@ -54,7 +54,7 @@ const TextForm = () => {
         if (validate(fields)) {
             const text: Text = {id: textId, title: fields.title, text: fields.text};
             const apiCall = textId ? updateTextInDB : addTextToDB;
-            apiCall(text, () => history.push("/library"));
+            apiCall(text, () => navigate("/library"));
         }
     };
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useHistory, Link} from "react-router-dom";
+import {useNavigate, Link, useLocation} from "react-router-dom";
 import {fetchTitles, deleteTextFromDB} from "../../services/TextService";
 import ListItem from "./ListItem";
 import {Text} from "../../model/Text";
@@ -7,7 +7,8 @@ import {useLoader} from "../common/LoaderHook";
 import Loader from "../common/Loader";
 
 const Library: React.FC = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
+    const location = useLocation();
     const {isLoading, startLoading, stopLoading} = useLoader();
 
     const [texts, setTexts] = useState<Text[]>([]);
@@ -29,7 +30,7 @@ const Library: React.FC = () => {
             })
             .finally(stopLoading);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [history]);
+    }, [location.key]);
 
     const filteredTexts = (searchQuery: string) => {
         return texts.filter(text => {
@@ -42,7 +43,7 @@ const Library: React.FC = () => {
     };
     
     const handleEdit = (text: Text) => {
-        history.push(`/edittext/${text.id}`);
+        navigate(`/edittext/${text.id}`);
     };
     
     const handleDelete = (text: Text) => {

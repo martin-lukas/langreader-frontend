@@ -15,15 +15,16 @@ const ReadingPage = () => {
     
     useEffect(() => {
         let isCancelled = false;
-        fetchParsedText(textId)
-            .then(response => {
-                if (!isCancelled) {
-                    setFetchedText(response.data);
-                }
-            })
-            .catch(err => console.error(err))
-            .finally(stopLoading);
-        
+        if (textId) {
+            fetchParsedText(textId)
+                .then(response => {
+                    if (!isCancelled) {
+                        setFetchedText(response.data);
+                    }
+                })
+                .catch(err => console.error(err))
+                .finally(stopLoading);
+        }
         return () => {
             isCancelled = true;
         };

@@ -4,7 +4,7 @@ import {loginUser} from "../../services/AuthService";
 import {useLoader} from "../common/LoaderHook";
 import Loader from "../common/Loader";
 import {useAppContext} from "../../context/AppContext";
-import { Redirect } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 const Login: React.FC = () => {
     const {activeUser, setActiveUser} = useAppContext();
@@ -38,7 +38,7 @@ const Login: React.FC = () => {
     if (isLoading) return <Loader/>;
 
     if (activeUser) {
-        return <Redirect to="/library"/>;
+        return <Navigate to="/library"/>;
     }
 
     return (

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import { Route, Routes, useNavigate} from "react-router-dom";
 import "../css/custom.scss";
 import {AppContext} from "../context/AppContext";
 import Header from "./Header";
@@ -29,6 +29,7 @@ import ContactUs from "./contact/ContactUs";
 
 const App = () => {
     const {isLoading, stopLoading} = useLoader();
+    const navigate = useNavigate();
 
     const [allLanguages, setAllLanguages] = useState<Language[]>();
     const [chosenLang, setChosenLang] = useState<Language | undefined>(loadChosenLang());
@@ -73,63 +74,60 @@ const App = () => {
                 setChosenLang: (newChosenLang) => handleChosenLangChange(newChosenLang),
                 nativeLang: loadNativeLang(),
             }}>
-                <BrowserRouter>
                     <Header/>
                     <Navigation/>
                     <div id="content-area">
-                        <Switch>
+                        <Routes>
                             {/* PUBLIC */}
-                            <Route exact path="/">
-                                <Homepage/>
-                            </Route>
-                            <Route exact path="/tutorial">
-                                <Tutorial/>
-                            </Route>
-                            <Route exact path="/login">
-                                <Login/>
-                            </Route>
-                            <Route exact path="/signup">
-                                <Signup/>
-                            </Route>
-                            <Route exact path="/contact">
-                                <ContactUs/>
-                            </Route>
-                            <Route exact path="/tos">
-                                <TermsOfService/>
-                            </Route>
-                            <Route exact path="/privacy">
-                                <PrivacyPolicy/>
-                            </Route>
+                            <Route path="/" element={<Homepage/>}/>
+                            <Route path="/tutorial" element={<Tutorial/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/signup" element={<Signup/>}/>
+                            <Route path="/contact" element={<ContactUs/>}/>
+                            <Route path="/tos" element={<TermsOfService/>}/>
+                            <Route path="/privacy" element={<PrivacyPolicy/>}/>
                             {/* PRIVATE */}
-                            <AuthenticatedRoute exact path={["/library", "/library/:reload"]}>
-                                <Library/>
-                            </AuthenticatedRoute>
-                            <AuthenticatedRoute exact path="/addtext">
-                                <TextForm/>
-                            </AuthenticatedRoute>
-                            <AuthenticatedRoute exact path="/edittext/:textId">
-                                <TextForm/>
-                            </AuthenticatedRoute>
-                            <AuthenticatedRoute path="/reading/:textId">
-                                <ReadingPage/>
-                            </AuthenticatedRoute>
-                            <AuthenticatedRoute path="/languages">
-                                <LanguageManagement/>
-                            </AuthenticatedRoute>
-                            <AuthenticatedRoute path="/profile">
-                                <Profile/>
-                            </AuthenticatedRoute>
+                            <Route path={"/library"} element={
+                                <AuthenticatedRoute>
+                                    <Library/>
+                                </AuthenticatedRoute>
+                            }/>
+                            <Route path={"/library/:reload"} element={
+                                <AuthenticatedRoute>
+                                    <Library/>
+                                </AuthenticatedRoute>
+                            }/>
+                            <Route path="/addtext" element={
+                                <AuthenticatedRoute>
+                                    <TextForm/>
+                                </AuthenticatedRoute>
+                            }/>
+                            <Route path="/edittext/:textId" element={
+                                <AuthenticatedRoute>
+                                    <TextForm/>
+                                </AuthenticatedRoute>
+                            }/>
+                            <Route path="/reading/:textId" element={
+                                <AuthenticatedRoute>
+                                    <ReadingPage/>
+                                </AuthenticatedRoute>
+                            }/>
+                            <Route path="/languages" element={
+                                <AuthenticatedRoute>
+                                    <LanguageManagement/>
+                                </AuthenticatedRoute>
+                            }/>
+                            <Route path="/profile" element={
+                                <AuthenticatedRoute>
+                                    <Profile/>
+                                </AuthenticatedRoute>
+                            }/>
                             {/* GENERAL */}
-                            <Route path="/error">
-                                <Error/>
-                            </Route>
-                            <Route>
-                                <NotFoundPage/>
-                            </Route>
-                        </Switch>
+                            <Route path="/error" element={<Error/>}/>
+                            <Route path="*" element={<NotFoundPage/>}/>
+                        </Routes>
                     </div>
                     <Footer/>
-                </BrowserRouter>
             </AppContext.Provider>
         </div>
     );
