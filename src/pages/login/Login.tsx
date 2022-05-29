@@ -18,16 +18,19 @@ const Login: React.FC = () => {
     const handleSubmit = (event: any): void => {
         event.preventDefault();
 
-        if (!username || !password) {
+        const trimmedUsername = username.trim();
+        const trimmedPassword = password.trim();
+
+        if (!trimmedUsername || !trimmedPassword) {
             setErrorMessage("Make sure you fill out all the fields.");
             return;
         }
         startLoading();
-        loginUser(username, password)
+        loginUser(trimmedUsername, trimmedPassword)
             .then((response) => {
                 setErrorMessage("");
                 const fetchedUser = response.data;
-                setActiveUser({...fetchedUser, password});
+                setActiveUser({...fetchedUser, password: trimmedPassword});
                 window.location.reload();
             }).catch(() => {
                 setErrorMessage("The login attempt was unsuccessful");
@@ -70,9 +73,7 @@ const Login: React.FC = () => {
                         />
                     </div>
                     <div className="auth-submit-button-div lower-form-group">
-                        <button className="auth-submit-button">
-                            Login
-                        </button>
+                        <button className="auth-submit-button">Login</button>
                     </div>
                 </form>
             </div>
