@@ -49,9 +49,8 @@ const App = () => {
 
     useEffect(() => {
         fetchAllLangs()
-            .then((response) => {
-                setAllLanguages(response.data);
-            })
+            .then((response) => setAllLanguages(response.data))
+            .catch(() => navigate("/error"))
             .finally(stopLoading);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
