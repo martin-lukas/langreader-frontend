@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import { Text } from "../model/Text";
 import { ParsedText } from "../model/ParsedText";
 import {loadBasicAuthenticationConfig} from "../utils/authUtils";
+import {TextFromUrlRequest} from "../model/TextFromUrlRequest";
 
 const BASE_URL = "/texts";
 
@@ -20,6 +21,14 @@ export const fetchParsedText = (id: string): Promise<AxiosResponse<ParsedText>> 
 
 export const addTextToDB = (text: Text, callback?: () => void): void => {
     axios.post(BASE_URL, text, loadBasicAuthenticationConfig())
+        .then(() => {
+            callback && callback();
+        })
+        .catch(err => console.error(err.response.data));
+};
+
+export const addTextToDBFromUrl = (request: TextFromUrlRequest, callback?: () => void): void => {
+    axios.post(`${BASE_URL}/url`, request, loadBasicAuthenticationConfig())
         .then(() => {
             callback && callback();
         })
