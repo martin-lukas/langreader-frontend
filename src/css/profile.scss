@@ -1,0 +1,46 @@
+.profile-page {
+    h4 {
+        font-size: 1.3em;
+    }
+    p {
+        padding: 0.8em 0;
+    }
+    a {
+        text-decoration: underline;
+        color: #5a5a5a;
+
+        &:hover {
+            color: var(--default-text-color);
+        }
+    }
+    a.account-removal-link {
+        display: block;
+
+    }
+    #delete-div {
+        margin-top: 50px;
+        text-align: center;
+    }
+    #del-consent {
+        margin-top: 10px;
+    }
+    #delete-account-box {
+        width: 20px;
+        margin-right: 10px;
+    }
+    button {
+        font-size: 1em;
+        font-weight: bold;
+        background-color: #c10808;
+        color: white;
+        margin-top: 10px;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        outline: 0;
+        cursor: pointer;
+    }
+    button:hover, button:focus {
+        background-color: #890000;
+    }
+}
