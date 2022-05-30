@@ -4,9 +4,6 @@ const isDevelopment = process.env.NODE_ENV === "development";
 
 const axiosInstance = Axios.create({baseURL: `${isDevelopment ? "http://localhost:8080" : ""}/api`});
 
-axiosInstance.interceptors.request.use((config) => {
-    config.headers["Content-type"] = "application/json";
-    return config;
-});
+axiosInstance.defaults.headers.common["Content-type"] = "application/json";
 
 export default axiosInstance;
